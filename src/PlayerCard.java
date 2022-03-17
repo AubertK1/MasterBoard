@@ -13,6 +13,7 @@ public class PlayerCard extends JPanel {
     private void layoutSetup(){
         //setting up the panels (beside the sidebar and toolbar)
 
+
         //Top Bar
         JPanel topBar = new JPanel(new GridBagLayout());
         topBar.setBorder(BorderFactory.createEtchedBorder());
@@ -21,6 +22,7 @@ public class PlayerCard extends JPanel {
         topBar.add(label2,new GridBagConstraints(0, 0, 1, 1, 0, 0.6,
                 GridBagConstraints.CENTER, GridBagConstraints.CENTER, new Insets(0, 0,0, 0),
                 0, 0));
+
 
         //General Stats
         //creating the panel
@@ -33,18 +35,25 @@ public class PlayerCard extends JPanel {
         JTextArea gTextArea = new JTextArea();
         //creating "Upload Image" feature as a button
         JButton gUploadBox = new JButton("Upload Image");
+
+        gUploadBox.setOpaque(false);
+        gUploadBox.setContentAreaFilled(false);
+        gUploadBox.setBorderPainted(true);
+
         //adding label to panel
         generalStats.add(gLabel, new GridBagConstraints(0, 0, 2, 1, 1.0, 0,
                 GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(20, 20, 10, 20),
                 0, 0));
         //adding text area to panel
-        generalStats.add(gTextArea, new GridBagConstraints(0, 1, 1, 1, .5, .8,
+        generalStats.add(gTextArea, new GridBagConstraints(0, 1, 1, 1, .7, .8,
                 GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(10, 20, 20, 20),
                 0, 0));
+        gTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(), new EmptyBorder(20, 20, 20, 20)));
         //adding Upload Image button to panel
         generalStats.add(gUploadBox, new GridBagConstraints(1, 1, 1, 1, .5, 0.8,
                 GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(10, 20, 20, 20),
                 0, 0));
+
 
         //Reminders
         //creating the panel
@@ -66,6 +75,7 @@ public class PlayerCard extends JPanel {
         //setting an outside border (an outline) and inside border (for the cursor position) to the text box
         rTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(), new EmptyBorder(20, 20, 20, 20)));
 
+
         //MasterBoard
         JPanel masterBoard = new JPanel(new GridBagLayout());
         masterBoard.setBorder(BorderFactory.createEtchedBorder());
@@ -75,6 +85,7 @@ public class PlayerCard extends JPanel {
                 GridBagConstraints.CENTER, GridBagConstraints.CENTER, new Insets(0, 0,0, 0),
                 0, 0));
 
+        //adding each panel to panelx
         this.add(topBar,  new GridBagConstraints(1, 0, 1, 1, 1.0, 0,
                 GridBagConstraints.FIRST_LINE_START, GridBagConstraints.HORIZONTAL, new Insets(2, 2, 5, 2),
                 0, 40));
@@ -87,10 +98,5 @@ public class PlayerCard extends JPanel {
         this.add(masterBoard,  new GridBagConstraints(2, 0, 1, 3, 1.0, 0.5,
                 GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(20, 10, 20, 10),
                 350, 0));
-
-        //setting up inside each panel
-
-
-
     }
 }
