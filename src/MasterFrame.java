@@ -51,7 +51,7 @@ public class MasterFrame extends JFrame {
                 GridBagConstraints.FIRST_LINE_START, GridBagConstraints.VERTICAL, new Insets(2, 2,2, 10),
                 50, 0));
         //toolbar
-        this.getContentPane().add(panel6,  new GridBagConstraints(0, 3, 3, 1, 1.0, 0.14,
+        this.getContentPane().add(panel6,  new GridBagConstraints(0, 3, 3, 1, 1.0, 0.24,
                 GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2),
                 0, 0));
         this.getContentPane().add(panelx,  new GridBagConstraints(1, 0, 2, 3, 1.0, 1,

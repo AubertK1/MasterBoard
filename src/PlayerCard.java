@@ -1,9 +1,14 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PlayerCard extends JPanel {
     GenStats genStats = new GenStats();
+    static boolean buttonCLicked = false;
 
     public PlayerCard(){
         super(new GridBagLayout());
@@ -39,6 +44,15 @@ public class PlayerCard extends JPanel {
         gUploadBox.setOpaque(false);
         gUploadBox.setContentAreaFilled(false);
         gUploadBox.setBorderPainted(true);
+
+        gUploadBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!buttonCLicked) {
+                    addPic(gUploadBox, generalStats);
+                }
+            }
+        });
 
         //adding label to panel
         generalStats.add(gLabel, new GridBagConstraints(0, 0, 2, 1, 1.0, 0,
@@ -98,5 +112,25 @@ public class PlayerCard extends JPanel {
         this.add(masterBoard,  new GridBagConstraints(2, 0, 1, 3, 1.0, 0.5,
                 GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(20, 10, 20, 10),
                 350, 0));
+    }
+    public void addPic(JButton gUploadBox, JPanel generalStats) {
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+            JFileChooser chooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    "JPG & GIF Images", "jpg", "gif");
+            chooser.setFileFilter(filter);
+            int returnVal = chooser.showOpenDialog(generalStats);
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+                Image img1 = ImageIO.read(chooser.getSelectedFile());
+                gUploadBox.setText("");
+                gUploadBox.setIcon(new ScaledImageIcon(img1, gUploadBox.getHeight(), gUploadBox.getWidth()));
+                gUploadBox.setMargin(new Insets(0, 0, 0, 0));
+                gUploadBox.setBorder(BorderFactory.createEtchedBorder());
+                buttonCLicked = true;
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
     }
 }
