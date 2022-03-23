@@ -27,35 +27,37 @@ public class MasterFrame extends JFrame {
         this.getContentPane().setLayout(new GridBagLayout());
 
         //Setup some panels with labels
-        JPanel panel1 = new JPanel(new GridBagLayout());
-        panel1.setBorder(BorderFactory.createEtchedBorder());
+        JPanel sideCard = new JPanel(new GridBagLayout());
+        sideCard.setPreferredSize(new Dimension(50, 660));
+        sideCard.setBorder(BorderFactory.createEtchedBorder());
         JLabel label1 =  new JLabel("Panel 1");
         label1.setHorizontalAlignment(SwingConstants.CENTER);
-        panel1.add(label1,new GridBagConstraints(0, 0, 1, 1, 0, 0.6,
+        sideCard.add(label1,new GridBagConstraints(0, 0, 1, 1, 0, 0.6,
                 GridBagConstraints.CENTER, GridBagConstraints.CENTER, new Insets(0, 0,0, 0),
                 0, 0));
 
         JPanel panelx = new PlayerCard();
 
-        JPanel panel6 = new JPanel(new GridBagLayout());
-        panel6.setBorder(BorderFactory.createEtchedBorder());
+        JPanel toolBar = new JPanel(new GridBagLayout());
+        toolBar.setPreferredSize(new Dimension(720, 60));
+        toolBar.setBorder(BorderFactory.createEtchedBorder());
         JLabel label6 =  new JLabel("Panel 6");
         label6.setHorizontalAlignment(SwingConstants.CENTER);
-        panel6.add(label6,new GridBagConstraints(0, 0, 1, 1, 0, 0.6,
+        toolBar.add(label6,new GridBagConstraints(0, 0, 1, 1, 0, 0.6,
                 GridBagConstraints.CENTER, GridBagConstraints.CENTER, new Insets(0, 0,0, 0),
                 0, 0));
 
         //Here goes the interesting code
         //side card
-        this.getContentPane().add(panel1,  new GridBagConstraints(0, 0, 1, 3, 0, 0.6,
-                GridBagConstraints.FIRST_LINE_START, GridBagConstraints.VERTICAL, new Insets(2, 2,2, 10),
+        this.getContentPane().add(sideCard,  new GridBagConstraints(0, 0, 1, 3, 0, 0.6,
+                GridBagConstraints.WEST, GridBagConstraints.VERTICAL, new Insets(2, 2,2, 10),
                 50, 0));
         //toolbar
-        this.getContentPane().add(panel6,  new GridBagConstraints(0, 3, 3, 1, 1.0, 0.24,
-                GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2),
-                0, 0));
-        this.getContentPane().add(panelx,  new GridBagConstraints(1, 0, 2, 3, 1.0, 1,
-                GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2),
-                0, 200));
+        this.getContentPane().add(toolBar,  new GridBagConstraints(0, 3, 3, 1, 1.0, 0,
+                GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2),
+                0, 55));
+        this.getContentPane().add(panelx,  new GridBagConstraints(1, 0, 2, 3, 1.0, .6,
+                GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2),
+                0, 124));
     }
 }
