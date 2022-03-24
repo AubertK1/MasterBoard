@@ -6,6 +6,6 @@ class ScaledImageIcon extends ImageIcon {
         super(image.getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
     ScaledImageIcon(Image image, int height) {
-        super(image.getScaledInstance(-1, height, Image.SCALE_SMOOTH));
+        super(image.getScaledInstance((int)(height*(8.5/11)), height, Image.SCALE_SMOOTH));
     }
 }

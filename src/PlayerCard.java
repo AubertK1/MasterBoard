@@ -5,11 +5,17 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
 
 public class PlayerCard extends JPanel {
     GenStats genStats = new GenStats();
     static boolean buttonCLicked = false;
-
+    static BufferedImage myPic;
+    static File imgFile;
     public PlayerCard(){
         super(new GridBagLayout());
 
@@ -50,7 +56,8 @@ public class PlayerCard extends JPanel {
         gUploadBox.setContentAreaFilled(false);
         gUploadBox.setBorderPainted(true);
 //        System.out.println(gUploadBox.getPreferredSize());
-        gUploadBox.setPreferredSize(new Dimension((int)((gUploadBox.getPreferredSize().width*5)*(8.5/11)), gUploadBox.getPreferredSize().height*5));
+        gUploadBox.setPreferredSize(new Dimension((int)((gUploadBox.getPreferredSize().width*5)*(8.5/11)),
+                gUploadBox.getPreferredSize().height*5));
 
         gUploadBox.addActionListener(new ActionListener() {
             @Override
@@ -58,9 +65,13 @@ public class PlayerCard extends JPanel {
                 if(!buttonCLicked) {
                     addPic(gUploadBox, generalStats);
                 }
+                else{
+                    new bigWindow(myPic);
+                }
 
             }
         });
+
 
         //adding label to panel
         generalStats.add(gLabel, new GridBagConstraints(0, 0, 2, 1, 1.0, 0,
@@ -70,7 +81,8 @@ public class PlayerCard extends JPanel {
         generalStats.add(gTextArea, new GridBagConstraints(0, 1, 1, 1, .75, .8,
                 GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(10, 20, 20, 10),
                 0, 0));
-        gTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(), new EmptyBorder(20, 20, 20, 20)));
+        gTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(),
+                new EmptyBorder(20, 20, 20, 20)));
         //adding Upload Image button to panel
         generalStats.add(gUploadBox, new GridBagConstraints(1, 1, 1, 1, .25, 0.8,
                 GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(10, 5, 20, 20),
@@ -90,7 +102,8 @@ public class PlayerCard extends JPanel {
         //setting the panel's layout to Border Layout so it is easier to fill the text box inside of it
         reminders.setLayout(new BorderLayout());
         //the BorderFactory.createCompoundBorder function allows me to put an outside border (border line) and inside border (insets)
-        reminders.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(), new EmptyBorder(20, 20, 20, 20)));
+        reminders.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(),
+                new EmptyBorder(20, 20, 20, 20)));
         //adding the label to the panel
         reminders.add(rLabel, BorderLayout.NORTH);
         //adding the text box to the panel
@@ -98,7 +111,8 @@ public class PlayerCard extends JPanel {
         //setting the label's inside border (insets)
         rLabel.setBorder(new EmptyBorder(0, 0, 20, 0));
         //setting an outside border (an outline) and inside border (for the cursor position) to the text box
-        rTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(), new EmptyBorder(20, 20, 20, 20)));
+        rTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(),
+                new EmptyBorder(20, 20, 20, 20)));
 
 
         //MasterBoard
@@ -138,6 +152,8 @@ public class PlayerCard extends JPanel {
             int returnVal = chooser.showOpenDialog(generalStats);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
                 Image img1 = ImageIO.read(chooser.getSelectedFile());
+                imgFile = chooser.getSelectedFile();
+                generalStats.remove(gUploadBox);
                 gUploadBox.setText("");
                 gUploadBox.setIcon(new ScaledImageIcon(img1, gUploadBox.getHeight(), gUploadBox.getWidth()));
                 generalStats.add(gUploadBox, new GridBagConstraints(1, 1, 1, 1, 0.25, 0,
@@ -146,10 +162,25 @@ public class PlayerCard extends JPanel {
 
                 gUploadBox.setMargin(new Insets(0, 0, 0, 0));
                 gUploadBox.setBorder(BorderFactory.createEtchedBorder());
-//                buttonCLicked = true;
+                buttonCLicked = true;
+//                myPic = ImageIO.read(imgFile);
             }
         } catch (Exception ex) {
             System.out.println(ex);
         }
+    }
+    private static BufferedImage imgScale (BufferedImage before) {
+        int w = before.getWidth();
+        int h = before.getHeight();
+        // Create a new image of the proper size
+        int w2 = (int) (w * (8.5/11));
+        int h2 = (h);
+        BufferedImage after = new BufferedImage(w2, h2, BufferedImage.TYPE_INT_ARGB);
+        AffineTransform scaleInstance = AffineTransform.getScaleInstance(8.5/11, 1);
+        AffineTransformOp scaleOp
+                = new AffineTransformOp(scaleInstance, AffineTransformOp.TYPE_BILINEAR);
+
+        scaleOp.filter(before, after);
+        return after;
     }
 }
