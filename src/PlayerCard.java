@@ -58,6 +58,7 @@ public class PlayerCard extends JPanel {
                 if(!buttonCLicked) {
                     addPic(gUploadBox, generalStats);
                 }
+
             }
         });
 
