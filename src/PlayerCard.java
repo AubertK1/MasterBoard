@@ -5,8 +5,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -16,6 +16,8 @@ public class PlayerCard extends JPanel {
     static boolean buttonCLicked = false;
     static BufferedImage myPic;
     static File imgFile;
+    JButton reSizeImg = new JButton();
+    JButton reSelect = new JButton();
     public PlayerCard(){
         super(new GridBagLayout());
 
@@ -39,6 +41,7 @@ public class PlayerCard extends JPanel {
         //General Stats
         //creating the panel
         JPanel generalStats = new JPanel(new GridBagLayout());
+        //setting panel preferred size so the inner panels don't mess up
         generalStats.setPreferredSize(new Dimension(590/5, 305/5));
         //setting panel border
         generalStats.setBorder(BorderFactory.createEtchedBorder());
@@ -49,29 +52,131 @@ public class PlayerCard extends JPanel {
         JTextArea gTextArea = new JTextArea();
         gTextArea.setPreferredSize(new Dimension((int)(590/5*(2.0/3)), (int)((305.0/5)*(8.0/10))));
         //creating "Upload Image" feature as a button
+        JPanel buttonPanel = new JPanel(new GridLayout());
         JButton gUploadBox = new JButton("Upload Image");
+        gUploadBox.setLayout(new GridBagLayout());
+        buttonPanel.setPreferredSize(new Dimension((int)(590/5*(1.0/3)), (int)((305.0/5)*(8.0/10))));
+        buttonPanel.setPreferredSize(new Dimension((int)((buttonPanel.getPreferredSize().width*5)*(8.5/11)),
+                buttonPanel.getPreferredSize().height*5));
+
         gUploadBox.setPreferredSize(new Dimension((int)(590/5*(1.0/3)), (int)((305.0/5)*(8.0/10))));
 
         gUploadBox.setOpaque(false);
         gUploadBox.setContentAreaFilled(false);
         gUploadBox.setBorderPainted(true);
+
+        reSelect.setOpaque(true);
+        reSelect.setContentAreaFilled(false);
+        reSelect.setBorderPainted(true);
+//        reSelect.setBorder(BorderFactory.createLineBorder(new Color(227, 136, 247),3));
+        JPanel backPanel = new JPanel();
+        backPanel.setBounds(reSelect.getBounds()); // Same to buttons bounds.
+        backPanel.setBackground(new Color(0, 0, 0, 50)); // Background with transeparent
+        reSelect.add(backPanel);
+
+        reSizeImg.setOpaque(true);
+        reSizeImg.setContentAreaFilled(false);
+        reSizeImg.setBorderPainted(true);
+//        reSizeImg.setBorder(BorderFactory.createLineBorder(new Color(227, 136, 247),3));
+        JPanel backPanel2 = new JPanel();
+        backPanel2.setBounds(reSizeImg.getBounds()); // Same to buttons bounds.
+        backPanel2.setBackground(new Color(0, 0, 0, 50)); // Background with transeparent
+        reSizeImg.add(backPanel2);
+
 //        System.out.println(gUploadBox.getPreferredSize());
         gUploadBox.setPreferredSize(new Dimension((int)((gUploadBox.getPreferredSize().width*5)*(8.5/11)),
                 gUploadBox.getPreferredSize().height*5));
+        reSizeImg.setPreferredSize(new Dimension((int)((gUploadBox.getPreferredSize().height/5)),
+                gUploadBox.getPreferredSize().height/5));
+        reSelect.setPreferredSize(new Dimension((int)((gUploadBox.getPreferredSize().height/5)),
+                gUploadBox.getPreferredSize().height/5));
 
+        gUploadBox.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e){
+                reSelect.setBorder(BorderFactory.createLineBorder(new Color(51, 51, 51),2, true));
+                backPanel.setVisible(true);
+                reSizeImg.setBorder(BorderFactory.createLineBorder(new Color(51, 51, 51),2, true));
+                backPanel2.setVisible(true);
+                //When enter we can not know our mouse successfully entered to the button. So I'd like to add Border
+            }
+            @Override
+            public void mouseExited(MouseEvent e){
+                reSelect.setBorder(null);
+                backPanel.setVisible(false);
+                reSizeImg.setBorder(null);
+                backPanel2.setVisible(false);
+                //When mouse exits no border.
+            }
+        });
+        reSelect.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent a){
+                reSelect.setBorder(BorderFactory.createLineBorder(new Color(51, 51, 51),2, true));
+                backPanel.setVisible(true);
+                backPanel.setBackground(new Color(0, 0, 0, 90));
+                reSizeImg.setBorder(BorderFactory.createLineBorder(new Color(51, 51, 51),2, true));
+                backPanel2.setVisible(true);
+                //When enter we can not know our mouse successfully entered to the button. So I'd like to add Border
+            }
+            @Override
+            public void mouseExited(MouseEvent a){
+                reSelect.setBorder(null);
+                backPanel.setVisible(false);
+                backPanel.setBackground(new Color(0, 0, 0, 50));
+                reSizeImg.setBorder(null);
+                backPanel2.setVisible(false);
+                //When mouse exits no border.
+            }
+        });
+        reSizeImg.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent b){
+                reSelect.setBorder(BorderFactory.createLineBorder(new Color(51, 51, 51),2, true));
+                backPanel.setVisible(true);
+                reSizeImg.setBorder(BorderFactory.createLineBorder(new Color(51, 51, 51),2, true));
+                backPanel2.setBackground(new Color(0, 0, 0, 90));
+                backPanel2.setVisible(true);
+                //When enter we can not know our mouse successfully entered to the button. So I'd like to add Border
+            }
+            @Override
+            public void mouseExited(MouseEvent b){
+                reSelect.setBorder(null);
+                backPanel.setVisible(false);
+                reSizeImg.setBorder(null);
+                backPanel2.setBackground(new Color(0, 0, 0, 50));
+                backPanel2.setVisible(false);
+                //When mouse exits no border.
+            }
+        });
         gUploadBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(!buttonCLicked) {
-                    addPic(gUploadBox, generalStats);
+                    addPic(gUploadBox, buttonPanel);
                 }
                 else{
-                    new bigWindow(myPic);
+                    new BigWindow(myPic);
                 }
 
             }
         });
+        reSelect.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(buttonCLicked)
+                addPic(gUploadBox, buttonPanel);
+            }
+        });
+        reSizeImg.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(buttonCLicked)
+                reAddPic(gUploadBox, buttonPanel, imgFile);
+            }
+        });
 
+        buttonPanel.add(gUploadBox, new GridLayout());
 
         //adding label to panel
         generalStats.add(gLabel, new GridBagConstraints(0, 0, 2, 1, 1.0, 0,
@@ -84,7 +189,7 @@ public class PlayerCard extends JPanel {
         gTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(),
                 new EmptyBorder(20, 20, 20, 20)));
         //adding Upload Image button to panel
-        generalStats.add(gUploadBox, new GridBagConstraints(1, 1, 1, 1, .25, 0.8,
+        generalStats.add(buttonPanel, new GridBagConstraints(1, 1, 1, 1, .25, 0.8,
                 GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(10, 5, 20, 20),
                 0, 0));
 
@@ -153,34 +258,56 @@ public class PlayerCard extends JPanel {
             if(returnVal == JFileChooser.APPROVE_OPTION) {
                 Image img1 = ImageIO.read(chooser.getSelectedFile());
                 imgFile = chooser.getSelectedFile();
+
                 generalStats.remove(gUploadBox);
+                gUploadBox.remove(reSizeImg);
+                gUploadBox.remove(reSelect);
                 gUploadBox.setText("");
                 gUploadBox.setIcon(new ScaledImageIcon(img1, gUploadBox.getHeight(), gUploadBox.getWidth()));
-                generalStats.add(gUploadBox, new GridBagConstraints(1, 1, 1, 1, 0.25, 0,
-                        GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 5, 20, 20),
+
+
+                generalStats.add(gUploadBox, new GridLayout());
+                gUploadBox.add(reSizeImg, new GridBagConstraints(3, 1, 1, 1, .1, .1,
+                        GridBagConstraints.FIRST_LINE_END, GridBagConstraints.NONE, new Insets(5, 0, 0, 5),
+                        0, 0));
+                gUploadBox.add(reSelect, new GridBagConstraints(2, 1, 1, 1, .1, .1,
+                        GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE, new Insets(5, 5, 0, 0),
                         0, 0));
 
                 gUploadBox.setMargin(new Insets(0, 0, 0, 0));
-                gUploadBox.setBorder(BorderFactory.createEtchedBorder());
+                gUploadBox.setBorder(BorderFactory.createLineBorder(new Color(51, 51, 51), 1));
                 buttonCLicked = true;
-//                myPic = ImageIO.read(imgFile);
+                myPic = ImageIO.read(imgFile);
             }
         } catch (Exception ex) {
             System.out.println(ex);
         }
     }
-    private static BufferedImage imgScale (BufferedImage before) {
-        int w = before.getWidth();
-        int h = before.getHeight();
-        // Create a new image of the proper size
-        int w2 = (int) (w * (8.5/11));
-        int h2 = (h);
-        BufferedImage after = new BufferedImage(w2, h2, BufferedImage.TYPE_INT_ARGB);
-        AffineTransform scaleInstance = AffineTransform.getScaleInstance(8.5/11, 1);
-        AffineTransformOp scaleOp
-                = new AffineTransformOp(scaleInstance, AffineTransformOp.TYPE_BILINEAR);
+    public void reAddPic(JButton gUploadBox, JPanel generalStats, File imgFile) {
+        try {
+            Image img1 = ImageIO.read(imgFile);
 
-        scaleOp.filter(before, after);
-        return after;
+            generalStats.remove(gUploadBox);
+            gUploadBox.remove(reSizeImg);
+            gUploadBox.remove(reSelect);
+            gUploadBox.setText("");
+            gUploadBox.setIcon(new ScaledImageIcon(img1, gUploadBox.getHeight(), gUploadBox.getWidth()));
+
+            generalStats.add(gUploadBox, new GridLayout());
+            gUploadBox.add(reSizeImg, new GridBagConstraints(3, 1, 1, 1, .1, .1,
+                    GridBagConstraints.FIRST_LINE_END, GridBagConstraints.NONE, new Insets(5, 0, 0, 5),
+                    0, 0));
+            gUploadBox.add(reSelect, new GridBagConstraints(2, 1, 1, 1, .1, .1,
+                    GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE, new Insets(5, 5, 0, 0),
+                    0, 0));
+
+            gUploadBox.setMargin(new Insets(0, 0, 0, 0));
+            gUploadBox.setBorder(BorderFactory.createLineBorder(new Color(51, 51, 51), 1));
+            buttonCLicked = true;
+            myPic = ImageIO.read(imgFile);
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
     }
+
 }
