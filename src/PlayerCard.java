@@ -47,50 +47,53 @@ public class PlayerCard extends JPanel {
         generalStats.setBorder(BorderFactory.createEtchedBorder());
         //creating label
         JLabel gLabel = new JLabel("General Stats");
+        //setting label preferred size
         gLabel.setPreferredSize(new Dimension((int)(590.0/5), (int)((305.0/5)*(2.0/10))));
         //creating text area
         JTextArea gTextArea = new JTextArea();
+        //setting text area preferred size
         gTextArea.setPreferredSize(new Dimension((int)(590/5*(2.0/3)), (int)((305.0/5)*(8.0/10))));
-        //creating "Upload Image" feature as a button
-        JPanel buttonPanel = new JPanel(new GridLayout());
+        //creating "Upload Image" feature as a button with a panel to add other buttons on top
         JButton gUploadBox = new JButton("Upload Image");
+        JPanel buttonPanel = new JPanel(new GridLayout());
+        //initializing button and panel
         gUploadBox.setLayout(new GridBagLayout());
         buttonPanel.setPreferredSize(new Dimension((int)(590/5*(1.0/3)), (int)((305.0/5)*(8.0/10))));
         buttonPanel.setPreferredSize(new Dimension((int)((buttonPanel.getPreferredSize().width*5)*(8.5/11)),
                 buttonPanel.getPreferredSize().height*5));
-
         gUploadBox.setPreferredSize(new Dimension((int)(590/5*(1.0/3)), (int)((305.0/5)*(8.0/10))));
-
+        //making button blank
         gUploadBox.setOpaque(false);
         gUploadBox.setContentAreaFilled(false);
         gUploadBox.setBorderPainted(true);
 
+        //"reselect button" to do obvious job
         reSelect.setOpaque(true);
         reSelect.setContentAreaFilled(false);
         reSelect.setBorderPainted(true);
-//        reSelect.setBorder(BorderFactory.createLineBorder(new Color(227, 136, 247),3));
-        JPanel backPanel = new JPanel();
+        JPanel backPanel = new JPanel(); //giving the button transparency
         backPanel.setBounds(reSelect.getBounds()); // Same to buttons bounds.
-        backPanel.setBackground(new Color(0, 0, 0, 50)); // Background with transeparent
+        backPanel.setBackground(new Color(0, 0, 0, 50)); // Background with transparent
         reSelect.add(backPanel);
 
+        //"resize image" button to readjust the image size when the window size changes
         reSizeImg.setOpaque(true);
         reSizeImg.setContentAreaFilled(false);
         reSizeImg.setBorderPainted(true);
-//        reSizeImg.setBorder(BorderFactory.createLineBorder(new Color(227, 136, 247),3));
-        JPanel backPanel2 = new JPanel();
+        JPanel backPanel2 = new JPanel(); //giving the button transparency
         backPanel2.setBounds(reSizeImg.getBounds()); // Same to buttons bounds.
-        backPanel2.setBackground(new Color(0, 0, 0, 50)); // Background with transeparent
+        backPanel2.setBackground(new Color(0, 0, 0, 50)); // Background with transparent
         reSizeImg.add(backPanel2);
 
-//        System.out.println(gUploadBox.getPreferredSize());
+        //setting more preferred sizes
         gUploadBox.setPreferredSize(new Dimension((int)((gUploadBox.getPreferredSize().width*5)*(8.5/11)),
                 gUploadBox.getPreferredSize().height*5));
-        reSizeImg.setPreferredSize(new Dimension((int)((gUploadBox.getPreferredSize().height/5)),
-                gUploadBox.getPreferredSize().height/5));
-        reSelect.setPreferredSize(new Dimension((int)((gUploadBox.getPreferredSize().height/5)),
-                gUploadBox.getPreferredSize().height/5));
+//        reSizeImg.setPreferredSize(new Dimension((int)((gUploadBox.getPreferredSize().height/5)),
+//                gUploadBox.getPreferredSize().height/5));
+//        reSelect.setPreferredSize(new Dimension((int)((gUploadBox.getPreferredSize().height/5)),
+//                gUploadBox.getPreferredSize().height/5));
 
+        //purely aesthetic choices
         gUploadBox.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseEntered(MouseEvent e){
@@ -149,6 +152,7 @@ public class PlayerCard extends JPanel {
                 //When mouse exits no border.
             }
         });
+        //makes buttons work
         gUploadBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -175,7 +179,7 @@ public class PlayerCard extends JPanel {
                 reAddPic(gUploadBox, buttonPanel, imgFile);
             }
         });
-
+        //adds button to panels
         buttonPanel.add(gUploadBox, new GridLayout());
 
         //adding label to panel
@@ -263,16 +267,16 @@ public class PlayerCard extends JPanel {
                 gUploadBox.remove(reSizeImg);
                 gUploadBox.remove(reSelect);
                 gUploadBox.setText("");
-                gUploadBox.setIcon(new ScaledImageIcon(img1, gUploadBox.getHeight(), gUploadBox.getWidth()));
+                gUploadBox.setIcon(new ScaledImageIcon(img1, gUploadBox.getHeight()));
 
 
                 generalStats.add(gUploadBox, new GridLayout());
                 gUploadBox.add(reSizeImg, new GridBagConstraints(3, 1, 1, 1, .1, .1,
                         GridBagConstraints.FIRST_LINE_END, GridBagConstraints.NONE, new Insets(5, 0, 0, 5),
-                        0, 0));
+                        20, 20));
                 gUploadBox.add(reSelect, new GridBagConstraints(2, 1, 1, 1, .1, .1,
                         GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE, new Insets(5, 5, 0, 0),
-                        0, 0));
+                        20, 20));
 
                 gUploadBox.setMargin(new Insets(0, 0, 0, 0));
                 gUploadBox.setBorder(BorderFactory.createLineBorder(new Color(51, 51, 51), 1));
@@ -291,15 +295,16 @@ public class PlayerCard extends JPanel {
             gUploadBox.remove(reSizeImg);
             gUploadBox.remove(reSelect);
             gUploadBox.setText("");
-            gUploadBox.setIcon(new ScaledImageIcon(img1, gUploadBox.getHeight(), gUploadBox.getWidth()));
+            gUploadBox.setIcon(new ScaledImageIcon(img1, gUploadBox.getHeight()));
+
 
             generalStats.add(gUploadBox, new GridLayout());
-            gUploadBox.add(reSizeImg, new GridBagConstraints(3, 1, 1, 1, .1, .1,
+            gUploadBox.add(reSizeImg, new GridBagConstraints(3, 1, 1, 1, .1, .5,
                     GridBagConstraints.FIRST_LINE_END, GridBagConstraints.NONE, new Insets(5, 0, 0, 5),
-                    0, 0));
-            gUploadBox.add(reSelect, new GridBagConstraints(2, 1, 1, 1, .1, .1,
+                    20, 20));
+            gUploadBox.add(reSelect, new GridBagConstraints(2, 1, 1, 1, .1, .5,
                     GridBagConstraints.FIRST_LINE_START, GridBagConstraints.NONE, new Insets(5, 5, 0, 0),
-                    0, 0));
+                    20, 20));
 
             gUploadBox.setMargin(new Insets(0, 0, 0, 0));
             gUploadBox.setBorder(BorderFactory.createLineBorder(new Color(51, 51, 51), 1));
