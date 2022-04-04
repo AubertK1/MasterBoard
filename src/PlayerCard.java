@@ -27,18 +27,28 @@ public class PlayerCard extends JPanel {
         //setting up the panels (beside the sidebar and toolbar)
 
 
-        //Top Bar
+        //region Top Bar
         JPanel topBar = new JPanel(new GridBagLayout());
         topBar.setPreferredSize(new Dimension(590/5,50/5));
         topBar.setBorder(BorderFactory.createEtchedBorder());
         JLabel label2 =  new JLabel("Panel 2");
-        label2.setHorizontalAlignment(SwingConstants.CENTER);
-        topBar.add(label2,new GridBagConstraints(0, 0, 1, 1, 0, 0.6,
-                GridBagConstraints.CENTER, GridBagConstraints.CENTER, new Insets(0, 0,0, 0),
+        label2.setPreferredSize(new Dimension(393/5,50/5));
+        String[] players = {"Player 1", "Player 2", "Player 3"};
+        JComboBox dropList = new JComboBox(players);
+        dropList.setPreferredSize(new Dimension(196/5,50/5));
+        dropList.setSelectedIndex(2);
+        topBar.add(label2, new GridBagConstraints(0, 0, 1, 1, 0.67, 0.2,
+                GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 10,0, 0),
+                0, 0));
+        topBar.add(dropList, new GridBagConstraints(1, 0, 1, 1, 0.33, 0.2,
+                GridBagConstraints.LINE_END, GridBagConstraints.BOTH, new Insets(5, 0,5, 10),
                 0, 0));
 
 
-        //General Stats
+        //endregion
+
+
+        //region General Stats
         //creating the panel
         JPanel generalStats = new JPanel(new GridBagLayout());
         //setting panel preferred size so the inner panels don't mess up
@@ -196,9 +206,10 @@ public class PlayerCard extends JPanel {
         generalStats.add(buttonPanel, new GridBagConstraints(1, 1, 1, 1, .25, 0.8,
                 GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(10, 5, 20, 20),
                 0, 0));
+        //endregion
 
 
-        //Reminders
+        //region Reminders
         //creating the panel
         JPanel reminders = new JPanel(new BorderLayout());
         reminders.setPreferredSize(new Dimension(590/5, 305/5));
@@ -222,6 +233,7 @@ public class PlayerCard extends JPanel {
         //setting an outside border (an outline) and inside border (for the cursor position) to the text box
         rTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(),
                 new EmptyBorder(20, 20, 20, 20)));
+        //endregion
 
 
         //MasterBoard
