@@ -35,10 +35,13 @@ public class PlayerCard extends JPanel {
         label2.setPreferredSize(new Dimension(393/5,50/5));
         String[] players = {"Player 1", "Player 2", "Player 3"};
         JComboBox dropList = new JComboBox(players);
+        DefaultListCellRenderer listCellRenderer = new DefaultListCellRenderer();
+        listCellRenderer.setHorizontalAlignment(DefaultListCellRenderer.CENTER);
+        dropList.setRenderer(listCellRenderer);
         dropList.setPreferredSize(new Dimension(196/5,50/5));
         dropList.setSelectedIndex(2);
         topBar.add(label2, new GridBagConstraints(0, 0, 1, 1, 0.67, 0.2,
-                GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 10,0, 0),
+                GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 20,0, 0),
                 0, 0));
         topBar.add(dropList, new GridBagConstraints(1, 0, 1, 1, 0.33, 0.2,
                 GridBagConstraints.LINE_END, GridBagConstraints.BOTH, new Insets(5, 0,5, 10),
