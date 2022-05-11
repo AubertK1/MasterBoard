@@ -26,7 +26,7 @@ public class MBBoard {
         frame.setUndecorated(true);
 //            JLabel board = new JLabel(new ImageIcon(img));
 //            panel.add(board, null);
-        panel.setBackground(Color.GREEN);
+        panel.setBackground(Color.WHITE);
         panel.setFocusable(true);
         frame.add(panel);
 //            frame.setLocationRelativeTo(null);

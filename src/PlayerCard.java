@@ -255,7 +255,7 @@ public class PlayerCard extends JPanel {
         Timer timer = new Timer(1, masterBoard);
 //            JLabel board = new JLabel(new ImageIcon(img));
 //            panel.add(board, null);
-        masterBoard.setBackground(Color.GREEN);
+        masterBoard.setBackground(Color.WHITE);
         masterBoard.setFocusable(true);
         masterBoard.setBorder(BorderFactory.createEtchedBorder());
         JLabel label5 =  new JLabel("Panel 5");
