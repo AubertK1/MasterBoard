@@ -240,14 +240,31 @@ public class PlayerCard extends JPanel {
 
 
         //MasterBoard
-        JPanel masterBoard = new JPanel(new GridBagLayout());
-        masterBoard.setPreferredSize(new Dimension(640/5, 660/5));
+//        JPanel masterBoard = new JPanel(new GridBagLayout());
+//        masterBoard.setPreferredSize(new Dimension(640/5, 660/5));
+        Panel masterBoard = new Panel(null);
+        masterBoard.addMouseListener(masterBoard);
+        masterBoard.addKeyListener(masterBoard);
+        // Transparent 16 x 16 pixel cursor image.
+        BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+        // Create a new blank cursor.
+        Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
+                cursorImg, new Point(0, 0), "blank cursor");
+        // Set the blank cursor to the JFrame.
+        masterBoard.setCursor(blankCursor);
+        Timer timer = new Timer(1, masterBoard);
+//            JLabel board = new JLabel(new ImageIcon(img));
+//            panel.add(board, null);
+        masterBoard.setBackground(Color.GREEN);
+        masterBoard.setFocusable(true);
         masterBoard.setBorder(BorderFactory.createEtchedBorder());
         JLabel label5 =  new JLabel("Panel 5");
         label5.setHorizontalAlignment(SwingConstants.CENTER);
         masterBoard.add(label5,new GridBagConstraints(0, 0, 1, 1, 0, 0.6,
                 GridBagConstraints.CENTER, GridBagConstraints.CENTER, new Insets(0, 0,0, 0),
                 0, 0));
+        masterBoard.requestFocus();
+        timer.start();
 
 
         //adding each panel to panelx

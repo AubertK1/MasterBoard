@@ -6,14 +6,12 @@ import java.util.List;
 
 // A line is a bunch of dots and two colors (for the fade effect)
 class Line {
-    //    ArrayList<Dot> dots = new ArrayList<Dot>();
     //makes a list to store the dots of the line
     ArrayList<Integer> xVals = new ArrayList<>();
     ArrayList<Integer> yVals = new ArrayList<>();
     ArrayList<Point> pVals = new ArrayList<>();
     ArrayList<Point> eVals = new ArrayList<>();
     ArrayList<Point> iVals = new ArrayList<>();
-//    ArrayList<Point> pnVals = new ArrayList<>();
 
     Color colorFrom;
     float diameter;
@@ -41,18 +39,6 @@ class Line {
         }
         if(!Panel.eraseMode)
             pVals.add(new Point(pVal));
-/*        for (int i = 1; i < pVals.size(); i++) {
-            if(pVal.x == pVals.get(i).x){
-//                getBet(pVals.get(i-1), pVals.get(i));
-                Point[] n = getPoints(pVals.get(i-1), pVals.get(i), 10);
-                System.out.println(n);
-            }
-        }*/
-
-//        Point nPoin = new Point(pVals.get());
-//        for (int i = 0; i < getPoints().size(); i++) {
-//            if(xVal == )
-//        }
     }
     void AddE(Point pVal){
         eVals.add(new Point(pVal));

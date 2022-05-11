@@ -36,9 +36,6 @@ public class Panel extends JPanel implements MouseListener, ActionListener, KeyL
         if(drawMode) {
             drawing.mouseDown = true;
         }
-        //fixme remove this to get code to work :/
-//        canvas.mouseReleased = false;
-
     }
 
     @Override
@@ -51,25 +48,23 @@ public class Panel extends JPanel implements MouseListener, ActionListener, KeyL
 
     @Override
     public void mouseEntered(MouseEvent e) {
-// Transparent 16 x 16 pixel cursor image.
+/*        // Transparent 16 x 16 pixel cursor image.
         BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
-
-// Create a new blank cursor.
+        // Create a new blank cursor.
         Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(
                 cursorImg, new Point(0, 0), "blank cursor");
-
-// Set the blank cursor to the JFrame.
-        MBBoard.frame.getContentPane().setCursor(blankCursor);
+        // Set the blank cursor to the JFrame.
+        Main.frame.getContentPane().setCursor(blankCursor);*/
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        mouseLoc = MouseInfo.getPointerInfo().getLocation();
+        mouseLoc.x = MouseInfo.getPointerInfo().getLocation().x-1000;
+        mouseLoc.y = MouseInfo.getPointerInfo().getLocation().y-50;
         if(drawMode) {
             drawing.Update(mouseLoc);
         }
@@ -109,7 +104,6 @@ public class Panel extends JPanel implements MouseListener, ActionListener, KeyL
             eraseMode = true;
         }
         else if(e.getKeyCode() == KeyEvent.VK_P){
-//            canvas.lines.get(0).pointWhatever(new Point(900, 0), new Point(1000, 1079));
             String l = "Eraser Points: ";
             for (int i = 0; i < drawing.lines.size(); i++) {
                 l = l+drawing.lines.get(i).eVals;
@@ -117,7 +111,6 @@ public class Panel extends JPanel implements MouseListener, ActionListener, KeyL
             System.out.println(l);
         }
         else if(e.getKeyCode() == KeyEvent.VK_L){
-//            System.out.println(canvas.lines.get(0).pVals);
             String l = "Draw Points: ";
             for (int i = 0; i < drawing.lines.size(); i++) {
                 l = l+drawing.lines.get(i).pVals;
@@ -125,7 +118,6 @@ public class Panel extends JPanel implements MouseListener, ActionListener, KeyL
             System.out.println(l);
         }
         else if(e.getKeyCode() == KeyEvent.VK_I){
-//            System.out.println(canvas.lines.get(0).pVals);
             String l = "Intersect Points: ";
             for (int i = 0; i < drawing.lines.size(); i++) {
                 l = l+drawing.lines.get(i).iVals;
@@ -193,39 +185,3 @@ public class Panel extends JPanel implements MouseListener, ActionListener, KeyL
 
     }
 }
-
-
-
-/*
-// a Dot has a size, a position and a color
-class Dot {
-    float xpos;
-    float ypos;
-    float diameter;
-    Color c;
-
-    Dot(float xpos, float ypos, float diameter, Color c) {
-        this.xpos = xpos;
-        this.ypos = ypos;
-        this.diameter = diameter;
-        this.c = c;
-    }
-
-    void Display(Graphics g, Point mouseLoc) {
-       // noStroke();
-        //fill(c);
-        //ellipse(xpos, ypos, diameter, diameter);
-
-  Graphics2D g2 = (Graphics2D) g;
-        g.setColor(c);
-        g.fillOval((int)xpos,(int)ypos,(int)diameter,(int)diameter);
-        g.drawLine();
-        g;*//*
-
-    }
-}
-*/
-
-
-
-

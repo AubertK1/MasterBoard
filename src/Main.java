@@ -2,12 +2,14 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Main {
+    static MasterFrame frame;
 
     public static void main(String[] args) {
         //setting up the window
-        MasterFrame mainFrame = new MasterFrame();
-        mainFrame.setLocationRelativeTo(null);
-        mainFrame.setVisible(true);
+        frame = new MasterFrame();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.setCursor(Cursor.getDefaultCursor());
         /*
         //fixme just testing JList stuff. Remove later
         String days[] = { "Monday","Tuesday","Wednesday",
