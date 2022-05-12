@@ -48,38 +48,124 @@ public class MasterFrame extends JFrame implements KeyListener {
         toolBar.setCursor(Cursor.getDefaultCursor());
         toolBar.setPreferredSize(new Dimension(720, 60));
         toolBar.setBorder(BorderFactory.createEtchedBorder());
-        JLabel label6 =  new JLabel("Panel 6");
+        JLabel label6 =  new JLabel("Tool Bar");
         label6.setHorizontalAlignment(SwingConstants.CENTER);
-        JButton drawButt = new JButton("draw");
+        JButton drawButt = new JButton("Draw");
+        JButton eraseButt = new JButton("Erase");
+        JButton size3 = new JButton("Size: 3");
+        JButton size5 = new JButton("Size: 5");
+        JButton size10 = new JButton("Size: 10");
+        JButton size20 = new JButton("Size: 20");
+        JButton sizeM = new JButton("Size: -2");
+        JButton sizeP = new JButton("Size: +2");
         drawButt.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(Panel.eraseMode){
+                //fixme put this back after show case
+/*                if(Panel.eraseMode){
                     for (int i = 0; i < Panel.drawing.lines.size(); i++) {
                         if(Panel.drawing.lines.get(i).eVals.size() > 0) {
                             Panel.drawing.lines.remove(Panel.drawing.lines.get(i));
                         }
                     }
-                }
+                }*/
                 Panel.drawMode = true;
                 Panel.eraseMode = false;
+                Brush.circleColor = Color.BLACK;
             }
         });
-        JButton eraseButt = new JButton("erase");
         eraseButt.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
                 Panel.drawMode = true;
                 Panel.eraseMode = true;
+                Brush.circleColor = Color.WHITE;
             }
         });
-        toolBar.add(label6,new GridBagConstraints(0, 0, 1, 1, 0.33, 0.6,
+        size3.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Panel.diameter = 3;
+                Canvas.diameter = 3;
+                Drawing.diameter = 3;
+                Brush.diameter = 3+3;            }
+        });
+        size5.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Panel.diameter = 5;
+                Canvas.diameter = 5;
+                Drawing.diameter = 5;
+                Brush.diameter = 5+3;
+            }
+        });
+        size10.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Panel.diameter = 10;
+                Canvas.diameter = 10;
+                Drawing.diameter = 10;
+                Brush.diameter = 10;
+            }
+        });
+        size20.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Panel.diameter = 20;
+                Canvas.diameter = 20;
+                Drawing.diameter = 20;
+                Brush.diameter = 20;
+            }
+        });
+        sizeM.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Panel.diameter = Panel.diameter - 2;
+                Canvas.diameter = Canvas.diameter - 2;
+                Drawing.diameter = Drawing.diameter - 2;
+                if(Brush.diameter < 7)
+                    Brush.diameter = Drawing.diameter + 2;
+                else
+                    Brush.diameter = Brush.diameter - 2;
+            }
+        });
+        sizeP.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Panel.diameter = Panel.diameter + 2;
+                Canvas.diameter = Canvas.diameter + 2;
+                Drawing.diameter = Drawing.diameter + 2;
+                if(Brush.diameter < 7)
+                    Brush.diameter = Drawing.diameter + 2;
+                else
+                    Brush.diameter = Brush.diameter + 2;
+            }
+        });
+        toolBar.add(label6,new GridBagConstraints(0, 0, 1, 2, 0.33, 0.6,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0,0, 0),
                 0, 0));
-        toolBar.add(drawButt,new GridBagConstraints(1, 0, 1, 1, 0.33, 0.6,
+        toolBar.add(drawButt,new GridBagConstraints(1, 0, 1, 2, 0.33, 0.6,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0,0, 0),
                 0, 0));
-        toolBar.add(eraseButt,new GridBagConstraints(2, 0, 1, 1, 0.33, 0.6,
+        toolBar.add(eraseButt,new GridBagConstraints(2, 0, 1, 2, 0.33, 0.6,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0,0, 0),
+                0, 0));
+        toolBar.add(size3,new GridBagConstraints(3, 0, 1, 1, 0.33, 0.6,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0,0, 0),
+                0, 0));
+        toolBar.add(size5,new GridBagConstraints(4, 0, 1, 1, 0.33, 0.6,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0,0, 0),
+                0, 0));
+        toolBar.add(size10,new GridBagConstraints(3, 1, 1, 1, 0.33, 0.6,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0,0, 0),
+                0, 0));
+        toolBar.add(size20,new GridBagConstraints(4, 1, 1, 1, 0.33, 0.6,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0,0, 0),
+                0, 0));
+        toolBar.add(sizeM,new GridBagConstraints(5, 0, 1, 1, 0.33, 0.6,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0,0, 0),
+                0, 0));
+        toolBar.add(sizeP,new GridBagConstraints(5, 1, 1, 1, 0.33, 0.6,
                 GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0,0, 0),
                 0, 0));
 

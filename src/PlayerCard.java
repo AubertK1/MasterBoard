@@ -31,7 +31,7 @@ public class PlayerCard extends JPanel {
         JPanel topBar = new JPanel(new GridBagLayout());
         topBar.setPreferredSize(new Dimension(590/5,50/5));
         topBar.setBorder(BorderFactory.createEtchedBorder());
-        JLabel label2 =  new JLabel("Panel 2");
+        JLabel label2 =  new JLabel("Player Name");
         label2.setPreferredSize(new Dimension(393/5,50/5));
         String[] players = {"Player 1", "Player 2", "Player 3"};
         JComboBox dropList = new JComboBox(players);
@@ -258,11 +258,6 @@ public class PlayerCard extends JPanel {
         masterBoard.setBackground(Color.WHITE);
         masterBoard.setFocusable(true);
         masterBoard.setBorder(BorderFactory.createEtchedBorder());
-        JLabel label5 =  new JLabel("Panel 5");
-        label5.setHorizontalAlignment(SwingConstants.CENTER);
-        masterBoard.add(label5,new GridBagConstraints(0, 0, 1, 1, 0, 0.6,
-                GridBagConstraints.CENTER, GridBagConstraints.CENTER, new Insets(0, 0,0, 0),
-                0, 0));
         masterBoard.requestFocus();
         timer.start();
 

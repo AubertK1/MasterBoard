@@ -15,6 +15,7 @@ class Line {
 
     Color colorFrom;
     float diameter;
+    float d2;
 
     Line(Color colorFrom, float diameter) {
         this.colorFrom = colorFrom;
@@ -24,6 +25,11 @@ class Line {
         this.colorFrom = colorFrom;
         this.diameter = diameter;
         this.pVals = pVals;
+    }
+    Line(Color colorFrom, float diameter, float d2) {
+        this.colorFrom = colorFrom;
+        this.diameter = diameter;
+        this.d2 = d2;
     }
     void Add(int xVal, int yVal) {
         //adds dots to lists
@@ -121,7 +127,7 @@ class Line {
             L1.add(P1);
             line.pVals = L1;
             L2.add(0, P2);
-            drawing.lines.add(drawing.lines.size()-1,new Line(L2, line.colorFrom, diameter));
+            drawing.lines.add(drawing.lines.size()-1,new Line(L2, line.colorFrom, line.diameter));
         }
     }
     Point intersectLoc(Point D1, Point D2, Point E1, Point E2) {

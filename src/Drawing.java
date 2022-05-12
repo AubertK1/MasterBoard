@@ -19,7 +19,7 @@ public class Drawing extends MasterBoardItem{
             if (mouseReleased) { // if this is a "new" line, add a line object to store it
                 if(Panel.drawMode) {
                     if(Panel.eraseMode){
-                        lines.add(new Line(Color.WHITE, diameter));
+                        lines.add(new Line(Color.WHITE, diameter, 10));
                     }
                     else
                         lines.add(new Line(circleColor, diameter));

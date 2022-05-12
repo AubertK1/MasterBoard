@@ -3,10 +3,10 @@ import java.awt.*;
 class Brush {
     boolean highlight;
     static float diameter;
-    Color circleColor;
+    static Color circleColor;
 
     Brush(Color circleColor, float diameter) {
-        this.circleColor = circleColor;
+        Brush.circleColor = circleColor;
         Brush.diameter = diameter+3;
     }
 
@@ -14,6 +14,9 @@ class Brush {
         Graphics2D g = (Graphics2D) h;
         g.setColor(circleColor);
         g.fillOval(mouseLoc.x-(int)(diameter/2), mouseLoc.y-(int)(diameter/2), (int)diameter, (int)diameter);
+        g.setColor(Color.BLACK);
+        g.setStroke(new BasicStroke(1));
+        g.drawOval(mouseLoc.x-(int)(diameter/2), mouseLoc.y-(int)(diameter/2), (int)diameter, (int)diameter);
         if(highlight){
             g.setColor(Color.BLUE);
             g.setStroke(new BasicStroke(diameter/9));
